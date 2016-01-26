@@ -1,0 +1,76 @@
+[user]
+	name = Peter Lewis
+	email = peter.lewis@orbitz.com
+
+[merge]
+  tool = extMerge
+#USE ARAXIS  tool = araxis
+
+[mergetool "extMerge"]
+  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+  keepTemporaries = false
+  trustExitCode = false
+  keepBackup = false
+
+[diff]
+#USE ARAXIS  tool = araxis
+  tool = p4
+  guitool = p4
+	
+[difftool]
+  prompt = false
+    
+[difftool "p4"]
+  cmd = extMerge \"$LOCAL\" \"$REMOTE\"
+
+[alias]
+	diffg = difftool -g
+	diffgc = difftool -g --cached
+	showg = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
+	co = checkout
+	fco = fuzzy-checkout
+	st = status
+	#st = status -sb
+	ci = commit
+	cif = commit -F commit.txt
+	br = branch
+	logg = log --graph
+	log1 = log -1
+	logn = log --name-status -1
+	ignore = !git update-index --assume-unchanged 
+        unignore = !git update-index --no-assume-unchanged
+        ignored = !git ls-files -v | grep ^[a-z]
+	diff1 = !sh -c 'git diffg $0^!'
+	bbr = !sh -c 'git co -b plewis/MBL-$0'
+	bco = !sh -c 'git co plewis/MBL-$0'
+	bmerge = !sh -c 'git merge plewis/MBL-$0'
+	format = clang-format-full -f
+	retire = !sh -c 'echo Moving plewis/MBL-$0 to old/plewis/MBL-$0 && git br -m plewis/MBL-$0 old/plewis/MBL-$0'
+
+[core]
+	excludesfile = /Users/peterlewis/.gitignore_global
+	editor = vim
+	quotepath = false
+# USE EMACS EDITOR editor = /Users/peter/bin/gitEmacsEditor.sh
+# USE VIM EDITOR editor = /usr/bin/vim
+#	editor = /opt/local/bin/vim
+
+[color]
+	ui = auto
+[log]
+	date = local
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[branch]
+	autosetuprebase = always
+[push]
+	default = current
+
+[clangFormat]
+	binary = /Users/peterlewis/software/clang+llvm-3.5.0-macosx-apple-darwin/bin/clang-format
+	style = file
+
