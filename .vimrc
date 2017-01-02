@@ -12,17 +12,20 @@ Plugin 'gmarik/vundle'
 " My bundles here:
 "
 " original repos on GitHub
-Plugin 'tpope/vim-fugitive'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'davidoc/taskpaper.vim'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'tpope/vim-rsi'
+"Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-unimpaired'
+"Plugin 'jonathanfilip/vim-lucius'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mitsuse/autocomplete-swift'
+Plugin 'keith/swift.vim'
+Plugin 'scrooloose/syntastic'
 
 " vim-scripts repos
 "Plugin 'L9'
-Plugin 'Logcat-syntax-highlighter'
+Plugin 'git-time-lapse'
 
 " non-GitHub repos
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -62,13 +65,11 @@ autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 "colorscheme solarized
 
 " Lucius color scheme
-colorscheme lucius
+"colorscheme lucius
 
 "set background=dark
 "colorscheme slate
 
-" Setting to make Logcat-syntax-highlighter work
-au BufRead,BufNewFile *.logcat set filetype=logcat
-nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 
 let mapleader = " "

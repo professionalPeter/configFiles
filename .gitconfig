@@ -1,38 +1,33 @@
 [user]
-	name = Peter Lewis
-	email = peter.lewis@orbitz.com
+  name = Peter Lewis
+  email = peter.lewis@climate.com
 
 [merge]
-  tool = extMerge
-#USE ARAXIS  tool = araxis
+  tool = p4mergetool
 
-[mergetool "extMerge"]
-  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+[mergetool "p4mergetool"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$PWD/$BASE\"" "\"$PWD/$LOCAL\""  "\"$PWD/$REMOTE\"" "\"$PWD/$MERGED\""
   keepTemporaries = false
   trustExitCode = false
   keepBackup = false
 
 [diff]
-#USE ARAXIS  tool = araxis
-  tool = p4
-  guitool = p4
+  tool = p4mergetool
 	
 [difftool]
   prompt = false
     
-[difftool "p4"]
-  cmd = extMerge \"$LOCAL\" \"$REMOTE\"
+[difftool "p4mergetool"]
+  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "\"$LOCAL\"" "\"$REMOTE\""
 
 [alias]
 	diffg = difftool -g
 	diffgc = difftool -g --cached
 	showg = "!showci () { rev=${1:-HEAD}; git difftool $rev~1 $rev; }; showci $1"
 	co = checkout
-	fco = fuzzy-checkout
 	st = status
 	#st = status -sb
 	ci = commit
-	cif = commit -F commit.txt
 	br = branch
 	logg = log --graph
 	log1 = log -1
@@ -41,11 +36,7 @@
         unignore = !git update-index --no-assume-unchanged
         ignored = !git ls-files -v | grep ^[a-z]
 	diff1 = !sh -c 'git diffg $0^!'
-	bbr = !sh -c 'git co -b plewis/MBL-$0'
-	bco = !sh -c 'git co plewis/MBL-$0'
-	bmerge = !sh -c 'git merge plewis/MBL-$0'
-	format = clang-format-full -f
-	retire = !sh -c 'echo Moving plewis/MBL-$0 to old/plewis/MBL-$0 && git br -m plewis/MBL-$0 old/plewis/MBL-$0'
+	rbr = "!sh -c git ls-remote --heads $0  | sed 's?.*refs/heads/??'"
 
 [core]
 	excludesfile = /Users/peterlewis/.gitignore_global
@@ -70,7 +61,5 @@
 [push]
 	default = current
 
-[clangFormat]
-	binary = /Users/peterlewis/software/clang+llvm-3.5.0-macosx-apple-darwin/bin/clang-format
-	style = file
-
+[pull]
+	rebase = true
