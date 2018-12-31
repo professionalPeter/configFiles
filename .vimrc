@@ -22,6 +22,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mitsuse/autocomplete-swift'
 Plugin 'keith/swift.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'sillybun/vim-repl'
 
 " vim-scripts repos
 "Plugin 'L9'
@@ -47,9 +48,14 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
 inoremap jk <ESC>
-" This doesn't work form the terminal right now because the terminal
+
+" This doesn't work from the terminal right now because the terminal
 " intercepts the control-S
 nnoremap <C-s> :w<CR>
+
+" Shortcut to go from Terminal mode to Normal mode
+tnoremap jk <C-\><C-n>
+
 set ruler
 set incsearch
 set ignorecase
@@ -59,6 +65,8 @@ set number
 syntax on
 syntax enable
 autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
+autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+
 " Solarized stuff
 "let g:solarized_termtrans = 1
 "set background=light
@@ -71,5 +79,14 @@ autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 "colorscheme slate
 
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
-
+let g:repl_program = {
+			\	"default": "zsh",
+			\	"python": "/Users/peter.lewis/anaconda3/bin/python",
+			\	}
+let g:repl_exit_commands = {
+			\	"python": "exit()",
+			\	"bash": "exit",
+			\	"zsh": "exit",
+			\	"default": "exit()",
+			\	}
 let mapleader = " "
