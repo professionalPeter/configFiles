@@ -2,6 +2,12 @@ set shell=bash
 set nocompatible
 filetype off
 
+" Enable recursive file searching
+set path+=**
+
+" Set 
+set wildmode=list:full
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -23,6 +29,7 @@ Plugin 'mitsuse/autocomplete-swift'
 Plugin 'keith/swift.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sillybun/vim-repl'
+Plugin 'scrooloose/nerdtree'
 
 " vim-scripts repos
 "Plugin 'L9'
@@ -66,6 +73,7 @@ syntax on
 syntax enable
 autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=4 sw=4 expandtab
 
 " Solarized stuff
 "let g:solarized_termtrans = 1
@@ -90,3 +98,10 @@ let g:repl_exit_commands = {
 			\	"default": "exit()",
 			\	}
 let mapleader = " "
+
+"File Explorer Settings (netrw)
+"let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25

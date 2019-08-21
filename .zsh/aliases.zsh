@@ -42,3 +42,6 @@ alias gsh="git shortlog | grep -E '^[ ]+\w+' | wc -l"
 
 # gu shows a list of all developers and the number of commits they've made
 alias guser="git shortlog | grep -E '^[^ ]'"
+
+# MacVim
+alias mvim="/Applications/MacVim.app/Contents/bin/mvim"

@@ -9,5 +9,5 @@ source ~/.zsh/functions.zsh
 source ~/.zsh/history.zsh
 source ~/.zsh/zsh_hooks.zsh
 #source ~/src/zaw/zaw.zsh
-source ~/software/z.sh
+source ~/software/configFiles/z.sh
 
